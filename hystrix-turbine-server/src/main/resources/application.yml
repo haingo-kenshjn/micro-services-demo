@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: turbineserver
+  profiles:
+    active:
+      default
+  cloud:
+    config:
+      enabled: true
+
+management.endpoint.health.enabled: true
+management.endpoints.jmx.exposure.include: '*'
+management.endpoints.web.exposure.include: '*'
+management.endpoints.web.base-path: /actuator
+management.endpoints.web.cors.allowed-origins: true
+management.endpoint.health.show-details: always
+
+turbine:
+  clusterNameExpression: "'default'"
+  aggregator:
+    clusterConfig: default
+  appConfig: licensingservice,organizationservice
+  combine-host-port: true
+  instanceUrlSuffix:
+    default: actuator/hystrix.stream
+
+server:
+  port: 9111
+
+  #Setting logging levels
+logging:
+    level:
+      com.netflix: WARN
+      org.springframework.web: WARN
+      com.thoughtmechanix: DEBUG
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+        defaultZone: http://localhost:8761/eureka/

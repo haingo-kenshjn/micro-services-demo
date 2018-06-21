@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: authenticationservice
+  profiles:
+    active:
+      default
+  cloud:
+    config:
+      enabled: true
+
+# disable driver's feature detection
+spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults: false
+
+# without detection you have to set the dialect by hand
+spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+
+#Setting the logging levels for the service
+logging:
+  level:
+    com.netflix: WARN
+    org.springframework.web: WARN
+    com.thoughtmechanix: DEBUG
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+        defaultZone: http://localhost:8761/eureka/
+server:
+  servlet:
+    context-path: /auth

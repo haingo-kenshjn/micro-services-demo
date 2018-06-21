@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: organizationservice
+  profiles:
+    active:
+      default
+  cloud:
+    config:
+      enabled: true
+
+management.endpoints.web.exposure.include: '*'
+
+# disable driver's feature detection
+spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults: false
+
+# without detection you have to set the dialect by hand
+spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+
+spring.zipkin.baseUrl: http://zipkinservice/
+spring.zipkin.discoveryClientEnabled: true
+spring.sleuth.sampler.probability: 1
+
+#security:
+#  oauth2:
+#    resource:
+#       userInfoUri: http://localhost:8901/auth/user
+
+#Setting the logging levels for the service
+logging:
+  level:
+    com.netflix: DEBUG
+    org.springframework.web: WARN
+    com.thoughtmechanix: DEBUG
+
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+        defaultZone: http://localhost:8761/eureka/
+
+
